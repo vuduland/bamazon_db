@@ -1,6 +1,6 @@
 var mysql = require("mysql");
 var inquirer = require("inquirer");
-require("console.table()");
+require("console.table");
 
 var connection = mysql.createConnection({
   host: "localhost",
@@ -18,14 +18,17 @@ connection.connect(function(err) {
 });
 
 const loadStock = () => {
-  connection.query("SELECT * FROM product_name", function(err, res) {
+  connection.query("SELECT * FROM bamazon", function(err, res) {
     if (err) throw err;
 
     console.table(res);
+    ``;
 
-    customPrompt();
+    customPrompt(res);
   });
 };
+
+// const validate = val => !isNaN(val) || val.toLowerCase() === "q";
 
 const customPrompt = stock => {
   inquirer
@@ -33,19 +36,24 @@ const customPrompt = stock => {
       {
         type: "input",
         name: "choice",
-        message: "Which item IDs are you searching for? [Q to Quit]\n"
+        message: "Which item IDs are you searching for? [Q to Quit]\n",
+        validate: function(val) {
+          return !isNaN(val) || val.toLowerCase() === "q";
+        }
       }
     ])
     .then(function(val) {
       exitCheck(val.choice);
-      var choiceMade = parseInt(val.choice);
-      var product = invCheck(choiceMade, stock);
+      var choice_id = parseInt(val.choice);
+      var product = invCheck(choice_id, stock);
 
       if (product) {
         customPromptQty(product);
+        // return choice;
       } else {
         console.log("\nThat item is not in the inventory.");
         loadStock();
+        // return choice;
       }
     });
 };
@@ -80,24 +88,64 @@ const buyTheThing = (bamazon, quantity) => {
     "UPDATE bamazon SET stock_quantity = stock_quantity - ? WHERE item_id = ?",
     [quantity, bamazon.item_id],
     function(err, res) {
-      console.log(
-        `\nPurchase successful: ${quantity} of ${bamazon.product_name}`
-      );
+      if (err) throw err;
+      var lessThanFour =
+        loadStock() &&
+        console.log(
+          `\nPurchase successful: ${quantity} pairs of ${bamazon.product_name}`
+        );
+      var lessThan4 =
+        loadStock() &&
+        console.log(
+          `\nPurchase successful: ${quantity} pair of ${bamazon.product_name}`
+        );
+      var greaterThanFour =
+        loadStock() &&
+        console.log(
+          `\nPurchase Successful: ${quantity} ${bamazon.product_name}'s`
+        );
+      var lessThanTen =
+        loadStock() &&
+        console.log(
+          `\nPurchase Successful: ${quantity} ${bamazon.product_name}`
+        );
+      var ten =
+        loadStock() &&
+        console.log(
+          `\nPurchase Successful: ${quantity} bunches of ${bamazon.product_name}`
+        );
+      var ten10 =
+        loadStock() &&
+        console.log(
+          `\nPurchase Successful: ${quantity} bunch of ${bamazon.product_name}`
+        );
+      return item_id < 4 && quantity > 1
+        ? lessThanFour
+        : item_id < 4 && quantity <= 1
+        ? lessThan4
+        : item_id >= 4 && item_id < 10 && quantity > 1
+        ? greaterThanFour
+        : item_id >= 4 && item_id < 10 && quantity <= 1
+        ? lessThanTen
+        : (item_id =
+            10 && quantity > 1
+              ? ten
+              : (item_id = 10 && quantity <= 1 ? ten10 : ten10));
     }
   );
 };
 
-invCheck = (choiceMade, stock) => {
+const invCheck = (choice_id, stock) => {
   for (let i = 0; i < stock.length; i++) {
-    if (stock[i].item_id === choiceMade) {
+    if (stock[i].item_id === choice_id) {
       return stock[i];
     }
   }
   return null;
 };
 
-exitCheck = () => {
-  if (choiceMade.toLowerCase() === "q") {
+const exitCheck = choice => {
+  if (choice.toLowerCase() === "q") {
     console.log("Later!");
     process.exit(0);
   }
