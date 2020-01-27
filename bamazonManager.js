@@ -1,4 +1,3 @@
-//
 //========================  BONUS:
 // create bamazonManager.js which:
 // =>views a set of menu options

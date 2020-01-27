@@ -28,8 +28,6 @@ const loadStock = () => {
   });
 };
 
-// const validate = val => !isNaN(val) || val.toLowerCase() === "q";
-
 const customPrompt = stock => {
   inquirer
     .prompt([
@@ -89,48 +87,14 @@ const buyTheThing = (bamazon, quantity) => {
     [quantity, bamazon.item_id],
     function(err, res) {
       if (err) throw err;
-      var lessThanFour =
-        loadStock() &&
-        console.log(
-          `\nPurchase successful: ${quantity} pairs of ${bamazon.product_name}`
-        );
-      var lessThan4 =
-        loadStock() &&
-        console.log(
-          `\nPurchase successful: ${quantity} pair of ${bamazon.product_name}`
-        );
-      var greaterThanFour =
-        loadStock() &&
-        console.log(
-          `\nPurchase Successful: ${quantity} ${bamazon.product_name}'s`
-        );
-      var lessThanTen =
-        loadStock() &&
-        console.log(
-          `\nPurchase Successful: ${quantity} ${bamazon.product_name}`
-        );
-      var ten =
-        loadStock() &&
-        console.log(
-          `\nPurchase Successful: ${quantity} bunches of ${bamazon.product_name}`
-        );
-      var ten10 =
-        loadStock() &&
-        console.log(
-          `\nPurchase Successful: ${quantity} bunch of ${bamazon.product_name}`
-        );
-      return item_id < 4 && quantity > 1
-        ? lessThanFour
-        : item_id < 4 && quantity <= 1
-        ? lessThan4
-        : item_id >= 4 && item_id < 10 && quantity > 1
-        ? greaterThanFour
-        : item_id >= 4 && item_id < 10 && quantity <= 1
-        ? lessThanTen
-        : (item_id =
-            10 && quantity > 1
-              ? ten
-              : (item_id = 10 && quantity <= 1 ? ten10 : ten10));
+      loadStock();
+      return bamazon.item_id < 4
+        ? console.log(
+            `\nPurchase successful: ${quantity} pair(s) of ${bamazon.product_name}`
+          )
+        : console.log(
+            `\nPurchase successful: ${quantity} ${bamazon.product_name}('s)`
+          );
     }
   );
 };

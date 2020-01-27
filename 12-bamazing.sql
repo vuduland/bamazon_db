@@ -12,8 +12,6 @@ CREATE TABLE bamazon (
   primary key (item_id)
 );
 
-SELECT * FROM bamazon
-
 INSERT INTO bamazon (product_name, department_name, price_retail, stock_quantity)
   VALUES
     ('socks', 'clothing', 10, 30),
@@ -25,5 +23,5 @@ INSERT INTO bamazon (product_name, department_name, price_retail, stock_quantity
     ('macbook', 'electronics', 2800, 10),
     ('apple', 'produce', 1, 200),
     ('xbox', 'electronics', 350, 1),
-    ('bananas', 'produce', 1, 500)
+    ('banana', 'produce', 1, 500)
 

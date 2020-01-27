@@ -1,5 +1,3 @@
-
-//
 //============= BONUS #3:
 // 1.) create new MySql table called 'departments':
 // includes: department_id, department_name, over_head_cost(a dummy number you set for each department)
@@ -17,7 +15,7 @@ etc.
 
  */
 
- //6.) total_profit column is calculated on the fly using the difference between over_head_costs and product_sales
+//6.) total_profit column is calculated on the fly using the difference between over_head_costs and product_sales
 // => hint: may need to look into aliases in MySql
 // => hint: may need to look into GROUP BYs
 // => hint: may need to look into JOINs
