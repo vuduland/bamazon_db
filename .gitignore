@@ -2,15 +2,5 @@ node_modules
 homework_instructions.md
 rando.md
 .DS_Store
-Untitled-1.js
-Solutions/Bamazon-Customer/bamazonCustomer.js
-Solutions/Bamazon-Customer/package.json
-Solutions/Bamazon-Customer/schema.sql
-Solutions/Bamazon-Manager/bamazonManager.js
-Solutions/Bamazon-Manager/package.json
-Solutions/Bamazon-Manager/schema.sql
-Solutions/Bamazon-Supervisor/bamazonCustomer.js
-Solutions/Bamazon-Supervisor/bamazonManager.js
-Solutions/Bamazon-Supervisor/bamazonSupervisor.js
-Solutions/Bamazon-Supervisor/package.json
-Solutions/Bamazon-Supervisor/schema.sql
+bamaonSupervisor.js
+bamazonManager.js
